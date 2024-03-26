@@ -1,0 +1,39 @@
+@startuml
+interface Resource {
+    + ResourceType resourceType
+    + int allocate(): int
+    + void free(int resourceId): void
+}
+
+class TimeSlotResource implements Resource {
+    + int allocate(): int
+    + void free(int resourceId): void
+    - void markTimeSlotFree(int resourceId): void
+    - void markTimeSlotBusy(int resourceId): void
+    - int findFreeTimeSlot(): int
+}
+
+class SpaceSlotResource implements Resource {
+    + int allocate(): int
+    + void free(int resourceId): void
+    - void markSpaceSlotFree(int resourceId): void
+    - void markSpaceSlotBusy(int resourceId): void
+    - int findFreeSpaceSlot(): int
+}
+
+enum ResourceType {
+    TIME_SLOT, 
+    SPACE_SLOT
+}
+
+class ResourceAllocator {
+    - INVALID_RESOURCE_ID: int
+    - Map<ResourceType, Resource> resourceMap
+    + allocate(ResourceType resourceType): int
+    + free(ResourceType resourceType, int resourceId): void
+}
+
+
+
+ResourceAllocator --> Resource
+@enduml

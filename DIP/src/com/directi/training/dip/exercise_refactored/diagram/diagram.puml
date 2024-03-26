@@ -1,0 +1,27 @@
+@startuml
+
+interface Database {
+    + write(data: String): int
+}
+
+class MyDatabase implements Database {
+    - static _data: Map<Integer, String>
+    - static _count: int
+    + write(data: String): int
+}
+
+class EncodingModule {
+    - database: Database
+    + setDatabase(db: Database): void
+    + encodeWithFiles(): void
+    + encodeBasedOnNetworkAndDatabase(): void
+}
+
+class EncodingModuleClient {
+    + main(args: String[]): void
+}
+
+EncodingModule --> Database
+EncodingModuleClient --> EncodingModule
+
+@enduml

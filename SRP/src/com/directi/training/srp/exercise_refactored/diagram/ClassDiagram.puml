@@ -1,0 +1,34 @@
+@startuml
+class Car {
+        - _id: String
+        - _model: String
+        - _brand: String
+
+        + Car(id: String, model: String, brand: String)
+        + getId(): String
+        + getModel(): String
+        + getBrand(): String
+    }
+
+    class CarRepository {
+        - _carsDb: List<Car>
+
+        + CarRepository()
+        + getCarById(carId: String): Car
+        + getAllCars(): List<Car>
+    }
+
+    class CarsFormatter {
+        - _cars: List<Car>
+        + getCarsNames(cars: List<Car>): String
+    }
+
+    class CarFinder {
+        - _cars: List<Car>
+        + getBestCar(cars: List<Car>): Car
+    }
+
+    CarRepository --> Car 
+    CarsFormatter --> Car 
+    CarFinder --> Car 
+@enduml
